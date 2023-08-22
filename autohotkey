@@ -12,3 +12,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ^SPACE:: Winset, Alwaysontop, , A
 
 #KeyHistory, 0
+CMDS =
+(
+Existing commands:
+sign - signature
+)
+
+#g::
+MsgBox %CMDS%
+return
+
+::sign::
+(
+Kind Regards,
+
+Javi Puig
+)
