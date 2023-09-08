@@ -15,14 +15,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 CMDS =
 (
 Existing commands:
-sign - signature
+kr - signature
 )
 
 #g::
 MsgBox %CMDS%
 return
 
-::sign::
+::kr::
 (
 Kind Regards,
 
