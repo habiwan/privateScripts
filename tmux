@@ -1,0 +1,1 @@
+bind-key C-x setw synchronize-panes on \;  set-window-option status-bg red \; display-message "pane sync on"; bind-key M-x setw synchronize-panes off \;  set-window-option status-bg green \; display-message "pane sync off"
