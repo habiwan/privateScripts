@@ -1,0 +1,11 @@
+
+docker run -d \
+  --name homeassistant \
+  --restart=unless-stopped \
+  -e TZ=Europe/Madrid \
+  -v /home/pi/Documents:/config \
+  -v /run/dbus:/run/dbus:ro \
+  --network=host \
+  --restart=unless-stopped \
+  --security-opt seccomp=unconfined \
+  ghcr.io/home-assistant/home-assistant:stable
