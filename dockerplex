@@ -1,0 +1,11 @@
+docker run \
+-d \
+--name plex \
+--network=host \
+--restart=unless-stopped \
+-e TZ="Europe\Madrid" \
+-v /home/pi/plex/config:/config \
+-v /tmp:/transcode \
+-v /home/pi/plex/data:/data \
+--security-opt seccomp=unconfined \
+greensheep/plex-server-docker-rpi:latest
