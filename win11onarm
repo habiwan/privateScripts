@@ -1,0 +1,15 @@
+# When failing with minimum requirements:
+# press Shift + F10 to open a terminal
+regedit
+# Go to
+Computer\HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig
+# Add 2 new 32bit REG_DWORD
+BypassTPMCheck 1
+BypassSecureBootCheck 1
+
+# To avoid failing internet check:
+# press Shift + F10 to open a terminal precisely after OOBE, just when country selection
+cd c:\Windows\System32\oobe
+bypassnro
+
+
