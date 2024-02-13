@@ -1,3 +1,5 @@
+# create a home/pi/plex folder for example (with data and config if you want to separate both) and it will use that persistent location.
+# TODO: there is a new volumes mount option for docker + maybe wise to ln -ls to the USB mount first before fixing and running this
 docker run \
 -d \
 --name plex \
