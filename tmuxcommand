@@ -1,1 +1,13 @@
-bind-key C-x setw synchronize-panes on \;  set-window-option status-bg red \; display-message "pane sync on"; bind-key M-x setw synchronize-panes off \;  set-window-option status-bg green \; display-message "pane sync off"
+create or add to ~/.tmux.conf:
+
+# Toggle Pane Synchronization ON with Ctrl-x
+bind-key C-x \
+    setw synchronize-panes on \; \
+    set-window-option status-bg red \; \
+    display-message "Pane sync ON"
+
+# Toggle Pane Synchronization OFF with Alt-x
+bind-key M-x \
+    setw synchronize-panes off \; \
+    set-window-option status-bg green \; \
+    display-message "Pane sync OFF"
