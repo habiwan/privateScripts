@@ -1,0 +1,80 @@
+Rust is a survival videogame where you start with nothing.
+For your own local Rust server here are some tips and commands.
+I use it on Bazzite with distrobox.
+You can then run 
+
+# server commands #
+
+playerInfo.unlockedItems
+give
+ownerid ID "reason"
+
+1. use /usr/bin/distrobox, install distrobox with:
+create -n rust-server --image ubuntu:22.04
+
+2. install steamcmd and rust in distrobox:
+enter rust-server
+sudo apt update && sudo apt install -y software-properties-common lib32gcc-s1 lib32stdc++6 curl nano
+mkdir ~/steamcmd && cd ~/steamcmd
+curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+./steamcmd.sh +force_install_dir ~/rust_ds +login anonymous +app_update 258550 validate +quit
+
+3. write a start script:
+cat ~/rust_ds/start_server.sh
+
+#!/bin/bash
+
+# 1. Update server:
+echo "--- CHECKING FOR RUST UPDATES ---"
+~/steamcmd/steamcmd.sh +force_install_dir ~/rust_ds +login anonymous +app_update 258550 validate +quit
+echo "--- UPDATE CHECK COMPLETE ---"
+
+# 2. Run the server:
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+cd ~/rust_ds
+./RustDedicated -batchmode -nographics \
++server.port 28015 \
++server.hostname "YOUR Rust Server" \
++server.identity "YOUR_rust_server" \
++server.seed 4550735 \
++server.worldsize 4500 \
++server.maxplayers 10 \
++server.secure 0 \
++server.encryption 0 \
++server.eac 0 \
++rcon.port 28016 \
++rcon.password "password" \
++rcon.web 1 \
++app.port 28082 \
++app.listenip 0.0.0.0 \
++app.publicip YOURDUCKDDNS.duckdns.org or IP
+
+# NOTE: If you forward TCP port 28082 from your router to the IP that is running this, you can use the Rust+ App on your phone!
+# To let other people in, you have to also forward other ports, I believe 28015 but look it up, not sure if UDP or TCP....
+# Once it's running, you can get a local server management system via websocket rcon on https://facepunch.github.io/webrcon/#/localhost:28016/info with the password above
+
+4. write a Bazzite Menu icon:
+cat ~/.local/share/applications/rust-server.desktop
+[Desktop Entry]
+Actions=Remove;
+Categories=Game;
+Comment=Launch Rust Dedicated Server in Distrobox
+Exec=/usr/bin/distrobox enter rust-server -- bash -c '~/rust_ds/start_server.sh'
+GenericName=Terminal entering Rust-server
+Icon=/home/habiwan/Pictures/Screenshots/rust.png
+Keywords=distrobox;
+Name=Rust Local Server
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+TryExec=/usr/bin/distrobox
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+
+[Desktop Action Remove]
+Exec=/usr/bin/distrobox rm  rust-server
+Name=Remove Rust-server from system
