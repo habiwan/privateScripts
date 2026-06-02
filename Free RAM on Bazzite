@@ -1,0 +1,13 @@
+# I noticed running rust server then rust client and dplaying for a bit my Memory usage was not "freed". Linux leaves it there just in case I decide to launch Distrobox or Rust again, 
+# which allows them to boot up almost instantly. If your system suddenly needs that RAM for something else, it will instantly drop the cache and hand the memory over to the new application.
+# But if you want to see the RAM free'd, just run this command:
+
+sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+
+What this command does:
+
+    1. sync: Forces the system to write any pending data from RAM back to your SSD/HDD, ensuring no data loss.
+
+    2. echo 3: Tells the kernel to clear PageCache, dentries, and inodes (1 clears PageCache, 2 clears dentries/inodes, 3 clears both).
+
+    3. tee /proc/sys/vm/drop_caches: Writes that instruction directly into the kernel's runtime configuration.
