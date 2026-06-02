@@ -16,4 +16,9 @@
                  .-=*##*#*=-:.
 
 # privateScripts
-my scripts I do for myself
+
+Hello there! 
+
+Here is a collection of a bunch of scripts I created for myself or that I gathered over the years from the interwebs.
+
+Use at you own risk.
