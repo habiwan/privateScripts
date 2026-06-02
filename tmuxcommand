@@ -1,4 +1,4 @@
-create or add to ~/.tmux.conf:
+# create or add to ~/.tmux.conf:
 
 # Toggle Pane Synchronization ON with Ctrl-x
 bind-key C-x \
