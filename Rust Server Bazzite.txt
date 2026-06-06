@@ -32,7 +32,7 @@ echo "--- UPDATE CHECK COMPLETE ---"
 # 2. Run the server:
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
 cd ~/rust_ds
-./RustDedicated -batchmode -nographics \
+./RustDedicated -batchmode -nographics -logfile /dev/stdout\
 +server.port 28015 \
 +server.hostname "YOUR Rust Server" \
 +server.identity "YOUR_rust_server" \
