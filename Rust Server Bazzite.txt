@@ -15,7 +15,7 @@ create -n rust-server --image ubuntu:22.04
 2. install steamcmd and rust in distrobox:
 enter rust-server
 sudo apt update && sudo apt install -y software-properties-common lib32gcc-s1 lib32stdc++6 curl nano
-mkdir ~/steamcmd && cd ~/steamcmd
+mkdir -p ~/rust_ds/steamcmd && cd ~/rust_ds/steamcmd
 curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 ./steamcmd.sh +force_install_dir ~/rust_ds +login anonymous +app_update 258550 validate +quit
 
@@ -26,13 +26,13 @@ cat ~/rust_ds/start_server.sh
 
 # 1. Update server:
 echo "--- CHECKING FOR RUST UPDATES ---"
-~/steamcmd/steamcmd.sh +force_install_dir ~/rust_ds +login anonymous +app_update 258550 validate +quit
+~/rust_ds/steamcmd/steamcmd.sh +force_install_dir ~/rust_ds +login anonymous +app_update 258550 validate +quit
 echo "--- UPDATE CHECK COMPLETE ---"
 
 # 2. Run the server:
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
 cd ~/rust_ds
-./RustDedicated -batchmode -nographics -logfile /dev/stdout\
+./RustDedicated -batchmode -nographics ~/rust_ds/rust_server_output.log \
 +server.port 28015 \
 +server.hostname "YOUR Rust Server" \
 +server.identity "YOUR_rust_server" \
